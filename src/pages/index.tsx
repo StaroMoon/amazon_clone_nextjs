@@ -6,7 +6,11 @@ import ProductFeed from "@/components/ProductFeed";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+interface ProductsType {
+  [key: string]: any;
+}
+
+export default function Home({ products }: ProductsType) {
   return (
     <div className="bg-gray-100 ">
       <Head>
@@ -20,8 +24,20 @@ export default function Home() {
         {/* Banner */}
         <Banner />
         {/* Products Feed */}
-        <ProductFeed />
+        <ProductFeed products={products} />
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      products,
+    },
+  };
 }
