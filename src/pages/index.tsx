@@ -4,8 +4,6 @@ import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import ProductFeed from "@/components/ProductFeed";
 
-const inter = Inter({ subsets: ["latin"] });
-
 interface ProductsType {
   [key: string]: any;
 }

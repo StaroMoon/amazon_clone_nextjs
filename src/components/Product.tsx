@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 
 interface ProductType {
@@ -22,11 +22,16 @@ const Product = ({
   category,
   image,
 }: ProductType) => {
-  const [rating, setRating] = useState(
-    Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
-  );
+  const [rating, setRating] = useState(1);
 
-  const [hasPrime, setHasPrime] = useState(Math.random() < 0.5);
+  const [hasPrime, setHasPrime] = useState(false);
+
+  useEffect(() => {
+    setRating(
+      Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
+    );
+    setHasPrime(Math.random() < 0.5);
+  }, []);
 
   return (
     <div className="relative flex flex-col m-5 bg-white z-30 p-10">
