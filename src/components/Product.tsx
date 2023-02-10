@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "@/slices/basketSlice";
 
 interface ProductType {
   id: number;
@@ -23,8 +25,23 @@ const Product = ({
   image,
 }: ProductType) => {
   const [rating, setRating] = useState(1);
-
   const [hasPrime, setHasPrime] = useState(false);
+  const dispatch = useDispatch();
+
+  const addItemToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      rating,
+      description,
+      category,
+      image,
+      hasPrime,
+    };
+
+    dispatch(addToBasket(product));
+  };
 
   useEffect(() => {
     setRating(
@@ -52,7 +69,7 @@ const Product = ({
         {Array(rating)
           .fill(0)
           .map((_, i) => (
-            <AiFillStar className="h-5 text-yellow-500" />
+            <AiFillStar className="h-5 text-yellow-500" key={i} />
           ))}
       </div>
       <p className="text-xs my-2 line-clamp-2">{description}</p>
@@ -68,7 +85,9 @@ const Product = ({
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}
-      <button className="mt-auto button">Add to Basket</button>
+      <button onClick={addItemToBasket} className="mt-auto button">
+        Add to Basket
+      </button>
     </div>
   );
 };
