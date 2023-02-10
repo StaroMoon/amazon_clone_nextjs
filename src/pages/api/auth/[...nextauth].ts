@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import TwitterProvider from "next-auth/providers/twitter";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -9,6 +10,10 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
     // ...add more providers here
+    TwitterProvider({
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
+    }),
   ],
 };
 
