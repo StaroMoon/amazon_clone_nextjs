@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "@/slices/basketSlice";
-
+import prime from "../../public/prime.png";
 interface ProductType {
   id: number;
   title: string;
@@ -76,12 +76,7 @@ const Product = ({
       <div className="mb-5">${price}</div>
       {hasPrime && (
         <div className="flex items-center space-x-2 -mt-5">
-          <Image
-            src="https://links.papareact.com/fdw"
-            alt="prime"
-            width={40}
-            height={40}
-          />
+          <Image src={prime} alt="prime" width={40} height={40} />
           <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
         </div>
       )}

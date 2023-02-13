@@ -6,13 +6,15 @@ import CheckoutProduct from "@/components/CheckoutProduct";
 import { useSession } from "next-auth/react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-const stripePromise = loadStripe(process.env.stripe_public_key as string);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
+);
 
 const Checkout = () => {
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
   const { data: session } = useSession();
-  console.log(session);
+
   const createCheckoutSession = async () => {
     const stripe = await stripePromise;
 

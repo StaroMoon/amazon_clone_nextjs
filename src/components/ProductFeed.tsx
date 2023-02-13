@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Product from "./Product";
+import advertisement from "../../public/advertisement.jpg";
 
 interface ProductsType {
   [key: string]: any;
@@ -33,7 +34,7 @@ const ProductFeed = ({ products }: ProductsType) => {
 
       <Image
         className="md:col-span-full"
-        src="https://links.papareact.com/dyz"
+        src={advertisement}
         alt="advertisement"
         width={5000}
         height={500}

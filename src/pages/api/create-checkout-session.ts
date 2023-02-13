@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { items, email } = req.body;
-  console.log(req.body);
+
   // Transform our data into format that Stripe accepted
   const transformedItems = items.map((item: any) => ({
     quantity: 1,

@@ -9,6 +9,7 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { selectItems } from "@/slices/basketSlice";
+import logo from "../../public/logo.png";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -22,7 +23,7 @@ const Header = () => {
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
             onClick={() => router.push("/")}
-            src="https://links.papareact.com/f90"
+            src={logo}
             width={150}
             height={40}
             alt="hi"
