@@ -29,7 +29,6 @@ export default function Home({ products }: ProductsType) {
 }
 
 export async function getServerSideProps() {
-  const session = await getSession();
   const products = await fetch("https://fakestoreapi.com/products").then(
     (res) => res.json()
   );
@@ -37,7 +36,6 @@ export async function getServerSideProps() {
   return {
     props: {
       products,
-      session,
     },
   };
 }
