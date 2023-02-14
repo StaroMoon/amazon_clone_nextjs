@@ -4,7 +4,6 @@ const nextConfig = {
   images: {
     domains: ["links.papareact.com", "fakestoreapi.com"],
   },
-  appDir: false,
 };
 
 module.exports = nextConfig;
