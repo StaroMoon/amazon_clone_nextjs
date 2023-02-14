@@ -39,12 +39,12 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       orders,
+      session,
     },
   };
 }
 
-const orders = ({ orders }: any) => {
-  const { data: session } = useSession();
+const orders = ({ orders, session }: any) => {
   return (
     <div>
       <Header />
