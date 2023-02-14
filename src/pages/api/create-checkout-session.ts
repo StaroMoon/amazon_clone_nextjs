@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function (req: NextApiRequest, res: NextApiResponse) {
   const { items, email } = req.body;
 
   // Transform our data into format that Stripe accepted
@@ -35,4 +35,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   res.status(200).json({ id: session.id });
-};
+}

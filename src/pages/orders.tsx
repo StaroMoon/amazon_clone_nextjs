@@ -59,8 +59,8 @@ const orders = ({ orders, session }: any) => {
           <h2>Please sign in to see your orders</h2>
         )}
         <div className="mt-5 space-y-4">
-          {orders?.map((order: object) => (
-            <Order order={order} />
+          {orders?.map((order: any) => (
+            <Order order={order} key={order.id} />
           ))}
         </div>
       </main>

@@ -2,7 +2,7 @@ import { addToBasket, removeFromBasket } from "@/slices/basketSlice";
 import Image from "next/image";
 import { AiFillStar } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-
+import prime from "../../public/prime.png";
 interface CheckoutProductType {
   id: string;
   title: string;
@@ -66,12 +66,7 @@ const CheckoutProduct = ({
         <p className="text-xs my-2 line-clamp-3">{description}</p>${price}
         {hasPrime && (
           <div className="flex items-center space-x-2">
-            <img
-              loading="lazy"
-              className="w-12"
-              src="https://links.papareact.com/fdw"
-              alt="prime"
-            />
+            <Image src={prime} alt="prime" width={40} height={40} />
             <p className="text-xs text-gray-500">FREE Next-day Delivery</p>
           </div>
         )}
