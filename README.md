@@ -16,8 +16,9 @@ This project is an Amazon clone website with some functions. I created this proj
 
 ## Why I built the project this way
 
-- I use NextJS because it provides optimization for website performance such as image optimazation and it also provide routing
-- For state management,
+- I use NextJS because it provides optimization for website performance such as image optimazation and it also provide routing and api routing.
+- For state management, I used Redux because it keeps state management in one place. So, if I want to add more features to the project, it'll be easy to manage states.
+- I use TailwindCSS because it helps me build the UI faster and I don't have to worry about naming the CSS classes.
 
 ## What would I change if I had more time
 
