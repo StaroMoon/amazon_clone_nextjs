@@ -1,38 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project is an Amazon clone website with some functions. I created this project with the following stack:
 
-## How I worked on this project
+- React (For front end ui)
+- NextJS (For routing and server side rendering)
+- NextAuth (For user authentication)
+- Redux (Global state management)
+- TailwindCSS (Utility css for ui)
+- Firestore (Store user data)
 
-First, run the development server:
+## Functionality
 
-```bash
+- Add item to basket and remove in checkout page
+- payment checkout with Stripe
+- Sign in & Sign out with Google account via Next Auth
+- Stripe webhook to store order on Firestore after successful payment and user can check order history.
+
+## Why I built the project this way
+
+- I use NextJS because it provides optimization for website performance such as image optimazation and it also provide routing
+- For state management,
+
+## What would I change if I had more time
+
+- I'll add unit and integrity testing with React Testing Library.
+- Store user items in local storage.
+
+## How to run this project
+
+First, you need to clone this project then change the file `.env.example` to `.env.local` and add variables to that file.
+
+### Google key
+
+You can get it from [here](https://console.cloud.google.com/apis/credentials/oauthclient) both `GOOGLE_ID` and `GOOGLE_SECRET`
+
+### Stripe key
+
+You can get `STRIPE_PUBLIC_KEY` and `STRIPE_SECRET_KEY` from [Stripe](https://stripe.com/docs/keys)
+
+`NEXT_PUBLIC_STRIPE_PUBLIC_KEY` is the same as `STRIPE_PUBLIC_KEY`. This is allowed NextJS to use this environment variable on client side.
+
+`STRIPE_SIGNING_SECRET` is the secret key that you can get from running a command in Stripe CLI. Read below how to get this key.
+You can ignore this key if you don't want to use Stripe webhook. This will make the order history not working after you successfully complete payment on Stripe.
+
+### Firebase Private Key
+
+You can get this from Firebase console at project settings > service accounts > Firebase admin SDK > generate new private key. This is the same as `STRIPE_SIGNING_SECRET`. If you don't have this key the webhook will not work.
+
+The private key is a json file. Unfortunately, I couldn't find a better way to use json file as enviroment variables than extracting each key and value. However, if you run this locally, you can import that json file and change `serviceAccount` variable in [webhook file](https://github.com/StaroMoon/amazon_clone_nextjs/blob/main/src/pages/api/webhook.ts) to your import.
+
+### Run the server
+
+After you add enviroment variables, you can run the server with following commands in you project:
+
+```
+npm i
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then you can access the project at [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+To run a webhook you need [Stripe CLI](https://stripe.com/docs/stripe-cli). After install Stripe CLI, run this command in separate terminal
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+stripe listen --forward-to localhost:3000/api/webhook
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Then you'll get `STRIPE_SIGNING_SECRET`
